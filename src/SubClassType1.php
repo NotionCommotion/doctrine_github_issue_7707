@@ -4,7 +4,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SubClassType1
  *
- * @Table(name="subClassType1")
+ * @Table(name="subclassType1")
  * @Entity
  */
 class SubClassType1 extends SubClass

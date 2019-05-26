@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="discriminator", type="string", length=32)
  * @DiscriminatorMap({"subClassType1" = "SubClassType1", "subClassType2" = "SubClassType2"})
- * @Entity @HasLifecycleCallbacks
+ * @Entity
  */
 abstract class SubClass
 {
@@ -16,7 +16,7 @@ abstract class SubClass
      * @var \MainClass
      *
      * @Id
-     * @GeneratedValue(strategy="IDENTITY")
+     * @GeneratedValue(strategy="NONE")
      * @OneToOne(targetEntity="MainClass", inversedBy="subClass")
      * @JoinColumns({
      *   @JoinColumn(name="id", referencedColumnName="id", onDelete="CASCADE")
@@ -49,31 +49,4 @@ abstract class SubClass
     {
         $this->someCommonProperty = $someCommonProperty;
     }
-
-    /** @PrePersist */
-    public function PrePersist()
-    {
-        syslog(LOG_INFO, 'SubClass - PrePersist');
-    }
-    /** @PostPersist */
-    public function PostPersist()
-    {
-        syslog(LOG_INFO, 'SubClass - PostPersist');
-    }
-    /** @PreFlush  */
-    public function PreFlush ()
-    {
-        syslog(LOG_INFO, 'SubClass - PreFlush');
-    }
-    /** @OnFlush */
-    public function OnFlush()
-    {
-        syslog(LOG_INFO, 'SubClass - OnFlush');
-    }
-    /** @PostFlush  */
-    public function PostFlush ()
-    {
-        syslog(LOG_INFO, 'SubClass - PostFlush');
-    }
 }
-
